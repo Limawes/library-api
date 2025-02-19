@@ -15,7 +15,7 @@ public class EmployeeModel {
   @Column(name = "id", nullable = false)
   private UUID id;
 
-  @Column(name = "name")
+  @Column(name = "Name")
   private String name;
 
   @Column(name = "Cpf")
@@ -27,6 +27,7 @@ public class EmployeeModel {
   @Column(name = "password")
   private String password;
 
-  @Column(name = "Address")
-  private String address;
+  @JoinColumn(name = "Address")
+  @OneToOne
+  private AddressModel address;
 }

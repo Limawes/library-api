@@ -32,4 +32,10 @@ public class AddressModel {
 
   @Column(name = "Country")
   private String country;
+
+  @OneToOne
+  private EmployeeModel employee;
+
+  @OneToOne
+  private PublisherModel publisher;
 }

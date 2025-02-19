@@ -4,24 +4,34 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
-public class PublisherModel {
+public class StudentModel {
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id", nullable = false)
   private UUID id;
 
-  @Column(name = "Cnpj", unique = true)
-  private String cnpj;
-
   @Column(name = "Name")
   private String name;
-  
-  @OneToOne
-  private String address;
+
+  @Column(name = "Phone_number")
+  private String phoneNumber;
+
+  @Column(name = "Cpf")
+  private String cpf;
+
+  @Column(name = "Fine")
+  private Long fine;//Multa
+
+  @Column(name = "Checkbox")
+  private Boolean checkbox;
+
+  @OneToMany
+  @Column(name = "Address")
+  private AddressModel address;
 }
