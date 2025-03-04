@@ -4,16 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Entity
 @Getter
 @Setter
 public class BookModel {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
-  private UUID id;
+  private Long id;
 
   @Column(name = "Name")
   private String name;
@@ -32,6 +30,6 @@ public class BookModel {
 
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "id_publisher", referencedColumnName = "id")
-  private PublisherModel idPublisher;
+  private PublisherModel publisher;
 
 }

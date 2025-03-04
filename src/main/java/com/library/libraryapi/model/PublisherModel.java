@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -12,7 +11,7 @@ import java.util.UUID;
 @Setter
 public class PublisherModel {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private UUID id;
 
@@ -23,5 +22,5 @@ public class PublisherModel {
   private String name;
   
   @OneToOne
-  private String address;
+  private AddressModel address;
 }

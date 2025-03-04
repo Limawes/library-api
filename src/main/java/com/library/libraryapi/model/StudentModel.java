@@ -12,7 +12,7 @@ import java.util.UUID;
 public class StudentModel {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private UUID id;
 
@@ -31,7 +31,7 @@ public class StudentModel {
   @Column(name = "Checkbox")
   private Boolean checkbox;
 
-  @OneToMany
+  @OneToOne
   @Column(name = "Address")
   private AddressModel address;
 }
