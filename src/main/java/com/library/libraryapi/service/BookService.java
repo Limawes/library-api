@@ -1,6 +1,7 @@
 package com.library.libraryapi.service;
 
 import com.library.libraryapi.dto.BookDTO;
+import com.library.libraryapi.dto.BookFillDto;
 import com.library.libraryapi.model.BookModel;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +15,15 @@ public class BookService {
         this.publisherService = publisherService;
     }
 
-    public BookModel saveBook(BookDTO bookdto) {
+    public BookModel saveBook(BookFillDto fillData) {
         BookModel book = new BookModel();
 
-        //criar método para buscar o author a partir do authorId;
-
-        book.setName(bookdto.getName());
-        book.setTopic(bookdto.getTopic());
-        book.setStatus(bookdto.getStatus());
-//        book.setAuthor(authorService.findAuthorById(bookdto.getAuthorById));
-        book.setTipping(bookdto.getTipping());
-        book.setPublisher(publisherService.findPublisherById(bookdto.getPublisherId()));
+        book.setName(fillData.getName());
+        book.setTopic(fillData.getTopic());
+        book.setStatus(fillData.getStatus());
+        book.setAuthor(fillData.getAuthorName());
+        book.setTipping(fillData.getTipping());
+        book.setPublisher(publisherService.findPublisherById(fillData.getPublisherId()));
 
         return book;
     }

@@ -12,23 +12,31 @@ import java.util.Optional;
 @Service
 public class PublisherService {
 
-    @Autowired
     private PublisherRepository repository;
 
+    public PublisherService(PublisherRepository repository) {
+        this.repository = repository;
+    }
+
     public PublisherModel findPublisherById(Long publisherId) {
+        try {
 
-        PublisherDTO publisherDto = new PublisherDTO();
+            PublisherDTO publisherDto = new PublisherDTO();
 
-        if (!Objects.isNull(publisherId)) {
-            Optional<PublisherModel> publisherEncountered = repository.findById(publisherId);
-            if (publisherEncountered.isPresent()) {
-                publisherDto.setName(publisherEncountered.get().getName());
-                publisherDto.setAddress(publisherEncountered.get().getAddress());
-                publisherDto.setCnpj(publisherEncountered.get().getCnpj());
+            if (!Objects.isNull(publisherId)) {
+                Optional<PublisherModel> publisherEncountered = repository.findById(publisherId);
+                if (publisherEncountered.isPresent()) {
+                    publisherDto.setName(publisherEncountered.get().getName());
+                    publisherDto.setAddress(publisherEncountered.get().getAddress());
+                    publisherDto.setCnpj(publisherEncountered.get().getCnpj());
+                }
             }
-        }
 
-        return convertToPublisher(publisherDto);
+            return convertToPublisher(publisherDto);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     private PublisherModel convertToPublisher(PublisherDTO dto) {
