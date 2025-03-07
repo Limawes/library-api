@@ -29,7 +29,7 @@ public class BookController {
 
     @PostMapping("/v1.0")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public BookModel create(@RequestParam BookFillDto fillData) {
+    public BookModel create(@RequestBody BookFillDto fillData) {
         BookModel book = new BookModel();
        try {
            if (!Objects.isNull(fillData)) {
