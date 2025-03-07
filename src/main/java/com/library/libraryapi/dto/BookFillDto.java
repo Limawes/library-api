@@ -15,6 +15,5 @@ public class BookFillDto {
     private Long tipping;
     private Boolean status;
     private String authorName;
-    private Long publisherId;
     private String publisherName;
 }

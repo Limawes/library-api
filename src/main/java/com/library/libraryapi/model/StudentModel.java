@@ -32,6 +32,5 @@ public class StudentModel {
   private Boolean checkbox;
 
   @OneToOne
-  @Column(name = "Address")
   private AddressModel address;
 }

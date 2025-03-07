@@ -27,7 +27,6 @@ public class BookService {
         book.setStatus(fillData.getStatus());
         book.setAuthor(fillData.getAuthorName());
         book.setTipping(fillData.getTipping());
-        book.setPublisher(publisherService.findPublisherById(fillData.getPublisherId()));
 
         return book;
     }

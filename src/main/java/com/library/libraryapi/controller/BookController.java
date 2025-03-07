@@ -2,6 +2,7 @@ package com.library.libraryapi.controller;
 
 import com.library.libraryapi.dto.BookFillDto;
 import com.library.libraryapi.model.BookModel;
+import com.library.libraryapi.repository.BookRepository;
 import com.library.libraryapi.service.BookService;
 import com.library.libraryapi.service.exception.LibraryException;
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +19,12 @@ import java.util.Objects;
 public class BookController {
 
 
+    private final BookRepository bookRepository;
     private BookService bookService;
 
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, BookRepository bookRepository) {
         this.bookService = bookService;
+        this.bookRepository = bookRepository;
     }
 
     @PostMapping("/v1.0")
@@ -47,6 +50,16 @@ public class BookController {
             throw new LibraryException("no books found for publisherId: " + publisherId);
         }
         return bookList;
+    }
+
+    @GetMapping("/v1.0/book/{bookId}")
+    public BookModel getBookById(@PathVariable Long bookId) {
+        BookModel book = bookRepository.findById(bookId).orElse(null);
+        if(book == null) {
+            log.info("No book found for id {}", bookId);
+            throw new LibraryException("no book found for id: " + bookId);
+        }
+        return book;
     }
 
 }
