@@ -1,10 +1,10 @@
 package com.library.libraryapi.service;
 
-import com.library.libraryapi.dto.PublisherDTO;
+import com.library.libraryapi.dto.PublisherFillDTO;
 import com.library.libraryapi.model.PublisherModel;
 import com.library.libraryapi.repository.PublisherRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -21,7 +21,7 @@ public class PublisherService {
     public PublisherModel findPublisherById(Long publisherId) {
         try {
 
-            PublisherDTO publisherDto = new PublisherDTO();
+            PublisherFillDTO publisherDto = new PublisherFillDTO();
 
             if (!Objects.isNull(publisherId)) {
                 Optional<PublisherModel> publisherEncountered = repository.findById(publisherId);
@@ -39,7 +39,18 @@ public class PublisherService {
         }
     }
 
-    private PublisherModel convertToPublisher(PublisherDTO dto) {
+    @Transactional
+    public PublisherModel savePublisher(PublisherFillDTO publisherDto) {
+        PublisherModel publisher = new PublisherModel();
+        if (!Objects.isNull(publisherDto)) {
+            publisher.setName(publisher.getName());
+            publisher.setAddress(publisherDto.getAddress());
+            publisher.setCnpj(publisherDto.getCnpj());
+        }
+        return repository.save(publisher);
+    }
+
+    private PublisherModel convertToPublisher(PublisherFillDTO dto) {
         PublisherModel publisher = new PublisherModel();
         publisher.setName(dto.getName());
         publisher.setAddress(dto.getAddress());

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PublisherDTO {
+public class PublisherFillDTO {
 
     private String cnpj;
     private String name;
