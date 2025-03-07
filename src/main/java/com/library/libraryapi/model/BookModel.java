@@ -28,6 +28,9 @@ public class BookModel {
   @Column(name = "Author")
   private String author;
 
+  @Column(name = "active")
+  private Boolean active;
+
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "id_publisher", referencedColumnName = "id")
   private PublisherModel publisher;

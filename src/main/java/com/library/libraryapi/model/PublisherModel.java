@@ -13,7 +13,7 @@ public class PublisherModel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
-  private UUID id;
+  private Long id;
 
   @Column(name = "Cnpj", unique = true)
   private String cnpj;

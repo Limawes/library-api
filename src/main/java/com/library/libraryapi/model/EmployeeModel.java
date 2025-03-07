@@ -13,7 +13,7 @@ public class EmployeeModel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
-  private UUID id;
+  private Long id;
 
   @Column(name = "Name")
   private String name;
