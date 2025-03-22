@@ -5,8 +5,13 @@ import com.library.libraryapi.model.BookModel;
 import com.library.libraryapi.repository.BookRepository;
 import com.library.libraryapi.service.BookService;
 import com.library.libraryapi.service.exception.LibraryException;
+import com.library.libraryapi.service.media.ImageService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -20,7 +25,8 @@ public class BookController {
 
 
     private final BookRepository bookRepository;
-    private BookService bookService;
+    private final BookService bookService;
+
 
     public BookController(BookService bookService, BookRepository bookRepository) {
         this.bookService = bookService;
@@ -60,6 +66,17 @@ public class BookController {
             throw new LibraryException("no book found for id: " + bookId);
         }
         return book;
+    }
+
+    @GetMapping("/v1.0/download-pdf")
+    public ResponseEntity<byte[]> generatePDF() {
+        byte[] retorno = ImageService.getImage();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "image.pdf");
+
+        return new ResponseEntity<>(retorno, headers, HttpStatus.OK);
     }
 
 }
