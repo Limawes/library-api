@@ -1,13 +1,13 @@
 package com.library.libraryapi.controller;
 
-import com.library.libraryapi.dto.PublisherFillDTO;
+import com.library.libraryapi.dto.PublisherDTO;
+import com.library.libraryapi.dto.fill.PublisherFillDTO;
 import com.library.libraryapi.model.PublisherModel;
 import com.library.libraryapi.service.PublisherService;
 import com.library.libraryapi.service.exception.LibraryException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Objects;
 
@@ -29,6 +29,18 @@ public class PublisherController {
             }
             return publisherModel;
         } catch (Exception e){
+            throw new LibraryException(e.getMessage());
+        }
+    }
+
+    @GetMapping("/v1.0/{publisherId}")
+    public PublisherDTO getPublisherById(@PathVariable long publisherId) {
+        PublisherModel publisher = new PublisherModel();
+        try{
+            publisher = publisherService.findPublisherById(publisherId);
+            return publisherService.converEntityToDTO(publisher);
+
+        } catch (Exception e) {
             throw new LibraryException(e.getMessage());
         }
     }

@@ -1,4 +1,4 @@
-package com.library.libraryapi.dto;
+package com.library.libraryapi.dto.fill;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

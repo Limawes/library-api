@@ -1,6 +1,6 @@
 package com.library.libraryapi.service;
 
-import com.library.libraryapi.dto.BookFillDto;
+import com.library.libraryapi.dto.fill.BookFillDto;
 import com.library.libraryapi.model.BookModel;
 import com.library.libraryapi.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
